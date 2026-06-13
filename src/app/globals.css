@@ -1,26 +1,388 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============================================================
+   MindShield AI — Design System
+   Google Fonts loaded via <link> in layout.tsx
+   ============================================================ */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* === COLOR SYSTEM (LIGHT) === */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --bg-surface: #ffffff;
+  --bg-elevated: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.9);
+
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-inverse: #ffffff;
+
+  --brand-teal: #0f766e;
+  --brand-teal-hover: #0d9488;
+  --brand-teal-glow: rgba(13, 148, 136, 0.2);
+  --brand-lavender: #7c3aed;
+  --brand-lavender-hover: #6d28d9;
+  --brand-lavender-glow: rgba(124, 58, 237, 0.2);
+  --brand-blue: #2563eb;
+  --brand-blue-glow: rgba(37, 99, 235, 0.2);
+
+  --status-success: #10b981;
+  --status-warning: #f59e0b;
+  --status-error: #ef4444;
+  --status-info: #3b82f6;
+
+  --border-default: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.15);
+
+  /* === GLASSMORPHISM (LIGHT) === */
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-bg-medium: rgba(255, 255, 255, 0.8);
+  --glass-bg-heavy: rgba(255, 255, 255, 0.95);
+  --glass-blur: 16px;
+  --glass-blur-heavy: 24px;
+  --glass-border: 1px solid rgba(0, 0, 0, 0.05);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  --glass-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.08);
+
+  /* === GRADIENTS (LIGHT) === */
+  --gradient-hero: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 40%, #cbd5e1 100%);
+  --gradient-brand: linear-gradient(135deg, #0d9488 0%, #7c3aed 100%);
+  --gradient-brand-reverse: linear-gradient(135deg, #7c3aed 0%, #0d9488 100%);
+  --gradient-card: linear-gradient(135deg, rgba(13, 148, 136, 0.05) 0%, rgba(124, 58, 237, 0.05) 100%);
+  --gradient-cta: linear-gradient(135deg, #7c3aed 0%, #0d9488 100%);
+  --gradient-warm: linear-gradient(135deg, #ea580c 0%, #e11d48 100%);
+  --gradient-cool: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+
+  /* === SPACING & RADIUS === */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* === TYPOGRAPHY === */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  /* === COLOR SYSTEM (DARK) === */
+  --bg-primary: #0a0e1a;
+  --bg-secondary: #111827;
+  --bg-surface: #1a1f35;
+  --bg-elevated: #232942;
+  --bg-card: rgba(26, 31, 53, 0.8);
+
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-inverse: #0a0e1a;
+
+  --brand-teal: #2ec4b6;
+  --brand-teal-hover: #25a99d;
+  --brand-teal-glow: rgba(46, 196, 182, 0.3);
+  --brand-lavender: #a78bfa;
+  --brand-lavender-hover: #8b5cf6;
+  --brand-lavender-glow: rgba(167, 139, 250, 0.3);
+  --brand-blue: #3b82f6;
+  --brand-blue-glow: rgba(59, 130, 246, 0.3);
+
+  --status-success: #34d399;
+  --status-warning: #fbbf24;
+  --status-error: #f87171;
+  --status-info: #60a5fa;
+
+  --border-default: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.15);
+
+  /* === GLASSMORPHISM (DARK) === */
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-bg-medium: rgba(255, 255, 255, 0.08);
+  --glass-bg-heavy: rgba(255, 255, 255, 0.12);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --glass-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.4);
+
+  /* === GRADIENTS (DARK) === */
+  --gradient-hero: linear-gradient(135deg, #0a0e1a 0%, #1a1040 40%, #0d2137 100%);
+  --gradient-brand: linear-gradient(135deg, #2ec4b6 0%, #8b5cf6 100%);
+  --gradient-brand-reverse: linear-gradient(135deg, #8b5cf6 0%, #2ec4b6 100%);
+  --gradient-card: linear-gradient(135deg, rgba(46, 196, 182, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+  --gradient-cta: linear-gradient(135deg, #8b5cf6 0%, #2ec4b6 100%);
+  --gradient-warm: linear-gradient(135deg, #f97316 0%, #f43f5e 100%);
+  --gradient-cool: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ============================================================
+   GLASS COMPONENTS
+   ============================================================ */
+
+.glass-card {
+  background: var(--glass-bg-medium);
+  backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  border: var(--glass-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.glass-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--glass-shadow-lg);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.glass-navbar {
+  background: rgba(10, 14, 26, 0.8);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-input:focus {
+  border-color: var(--brand-teal);
+  box-shadow: 0 0 0 3px var(--brand-teal-glow);
+  outline: none;
+}
+
+.glass-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.btn-primary {
+  background: var(--gradient-brand);
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 16px var(--brand-teal-glow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--brand-teal-glow);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: var(--glass-bg-medium);
+  color: var(--text-primary);
+  font-weight: 500;
+  border: var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--glass-bg-heavy);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ============================================================
+   GRADIENT TEXT
+   ============================================================ */
+
+.gradient-text {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-reverse {
+  background: var(--gradient-brand-reverse);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(46, 196, 182, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(46, 196, 182, 0.4); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+.animate-breathe {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+/* ============================================================
+   LAYOUT UTILITIES
+   ============================================================ */
+
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+@media (max-width: 1024px) {
+  .dashboard-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.section-padding {
+  padding: 5rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding: 6rem 2rem;
+  }
+}
+
+/* ============================================================
+   DECORATIVE ORB
+   ============================================================ */
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb-teal {
+  background: var(--brand-teal);
+  opacity: 0.15;
+}
+
+.orb-lavender {
+  background: var(--brand-lavender);
+  opacity: 0.12;
+}
+
+.orb-blue {
+  background: var(--brand-blue);
+  opacity: 0.1;
+}
+
+/* ============================================================
+   CHART OVERRIDES
+   ============================================================ */
+
+.recharts-cartesian-axis-tick-value {
+  fill: var(--text-muted) !important;
+  font-size: 12px !important;
+}
+
+.recharts-legend-item-text {
+  color: var(--text-secondary) !important;
 }
