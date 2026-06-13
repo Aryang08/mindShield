@@ -13,7 +13,6 @@ import {
   Menu,
   X,
   Shield,
-  ChevronLeft,
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 

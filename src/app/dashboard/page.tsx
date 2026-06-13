@@ -4,25 +4,17 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'motion/react';
 import {
-  BookOpen,
-  Wind,
-  MessageCircle,
-  TrendingUp,
-  TrendingDown,
-  AlertTriangle,
-  Target,
-  Zap,
-  Trophy,
-  Flame,
-  Moon,
-  ArrowRight,
-  Sparkles,
-  PenLine,
-  BarChart3,
+  Zap, BookOpen, ArrowRight, BarChart3, Flame, Sparkles, Target, AlertTriangle, Trophy, Wind, MessageCircle, TrendingUp
 } from 'lucide-react';
-import {
-  LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid,
-} from 'recharts';
+import dynamic from 'next/dynamic';
+
+const LineChart = dynamic(() => import('recharts').then((mod) => mod.LineChart), { ssr: false });
+const Line = dynamic(() => import('recharts').then((mod) => mod.Line), { ssr: false });
+const XAxis = dynamic(() => import('recharts').then((mod) => mod.XAxis), { ssr: false });
+const YAxis = dynamic(() => import('recharts').then((mod) => mod.YAxis), { ssr: false });
+const Tooltip = dynamic(() => import('recharts').then((mod) => mod.Tooltip), { ssr: false });
+const ResponsiveContainer = dynamic(() => import('recharts').then((mod) => mod.ResponsiveContainer), { ssr: false });
+const CartesianGrid = dynamic(() => import('recharts').then((mod) => mod.CartesianGrid), { ssr: false });
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import { getMoods, saveMood, getJournals, generateId } from '@/lib/storage';
 import type { MoodType } from '@/lib/types';
@@ -88,6 +80,7 @@ export default function DashboardPage() {
   useEffect(() => {
     const today = new Date().toISOString().split('T')[0];
     const moods = getMoods();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMoodEntries(moods);
     const todayMood = moods.find((m) => m.date === today);
     if (todayMood) {
@@ -140,7 +133,7 @@ export default function DashboardPage() {
         {/* Welcome */}
         <motion.div variants={fadeUp}>
           <h1 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)]">Welcome back! 👋</h1>
-          <p className="text-[var(--text-muted)] text-sm mt-1.5">{today}</p>
+          <p className="text-[var(--text-muted)] text-sm mt-1.5" suppressHydrationWarning>{today}</p>
           <p className="text-[var(--text-secondary)] text-sm mt-1 italic">&quot;Every hour of focused study is progress. Trust the process.&quot;</p>
         </motion.div>
 
@@ -165,8 +158,9 @@ export default function DashboardPage() {
           {selectedMood && !moodSaved && (
             <div className="flex flex-wrap items-center gap-5 mt-5 pt-5 border-t border-[var(--border-default)]">
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs text-[var(--text-muted)] font-medium">Intensity: {intensity}/10</label>
+                <label htmlFor="intensity-slider" className="text-xs text-[var(--text-muted)] font-medium">Intensity: {intensity}/10</label>
                 <input
+                  id="intensity-slider"
                   type="range" min="1" max="10" value={intensity}
                   onChange={(e) => setIntensity(Number(e.target.value))}
                   className="w-32 accent-[var(--brand-teal)]"
@@ -192,12 +186,12 @@ export default function DashboardPage() {
           {hasData ? (
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
               {/* Stress Score */}
-              <div className="p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-default)] flex flex-col items-center shadow-sm">
-                <CircularGauge value={Math.round(moodEntries.slice(-1)[0]?.intensity * 10 || 0)} color="var(--brand-teal)" label="Stress Score" />
+              <div className="glass-card p-6 rounded-2xl flex flex-col items-center">
+                <CircularGauge value={Math.round(moodEntries.slice(-1)[0]?.intensity * 10 || 0)} color="var(--color-primary)" label="Stress Score" />
               </div>
               {/* Burnout Risk */}
-              <div className="p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-default)] flex flex-col items-center gap-3 shadow-sm">
-                <div className="text-sm text-[var(--text-muted)] font-medium">Burnout Risk</div>
+              <div className="glass-card p-6 rounded-2xl flex flex-col items-center gap-3">
+                <div className="text-sm text-on-surface-variant font-medium">Burnout Risk</div>
                 <span className="px-3 py-1.5 rounded-full text-xs font-bold bg-[var(--status-warning)]/20 text-[var(--status-warning)]">
                   {moodEntries.length < 3 ? 'Insufficient Data' : 'Moderate'}
                 </span>
@@ -211,12 +205,12 @@ export default function DashboardPage() {
                 </div>
               </div>
               {/* Confidence */}
-              <div className="p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-default)] flex flex-col items-center shadow-sm">
-                <CircularGauge value={Math.round(moodEntries.slice(-1)[0]?.intensity * 10 || 0)} color="var(--brand-lavender)" label="Confidence" />
+              <div className="glass-card p-6 rounded-2xl flex flex-col items-center">
+                <CircularGauge value={Math.round(moodEntries.slice(-1)[0]?.intensity * 10 || 0)} color="var(--color-secondary)" label="Confidence" />
               </div>
               {/* Streak */}
-              <div className="p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-default)] flex flex-col items-center gap-3 shadow-sm">
-                <div className="text-sm text-[var(--text-muted)] font-medium">Journal Streak</div>
+              <div className="glass-card p-6 rounded-2xl flex flex-col items-center gap-3">
+                <div className="text-sm text-on-surface-variant font-medium">Journal Streak</div>
                 <div className="flex items-center gap-2">
                   <Flame className="w-7 h-7 text-[var(--status-warning)]" />
                   <span className="text-3xl font-bold text-[var(--text-primary)]">{journalCount}</span>
@@ -225,7 +219,7 @@ export default function DashboardPage() {
               </div>
             </div>
           ) : (
-            <div className="p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-default)] shadow-sm">
+            <div className="glass-card p-6 rounded-2xl">
               <EmptyState
                 icon={BarChart3}
                 title="No stats yet"
@@ -253,7 +247,7 @@ export default function DashboardPage() {
                   <motion.div
                     key={card.type}
                     variants={fadeUp}
-                    className={`p-5 rounded-2xl bg-gradient-to-br ${card.bg} border border-[var(--border-default)] hover:shadow-md transition-all duration-300`}
+                    className="glass-card ai-border ai-glow p-6 rounded-2xl transition-all duration-300"
                     whileHover={{ y: -2 }}
                   >
                     <Icon className="w-5 h-5 mb-3" style={{ color: card.color }} />

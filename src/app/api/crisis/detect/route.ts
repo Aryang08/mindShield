@@ -5,6 +5,10 @@ export async function POST(request: NextRequest) {
   try {
     const { text } = (await request.json()) as { text: string };
 
+    if (!text || text.length > 5000) {
+      return NextResponse.json({ error: 'Invalid payload length' }, { status: 400 });
+    }
+
     const crisisDetected = detectCrisis(text);
 
     if (crisisDetected) {

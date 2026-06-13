@@ -35,6 +35,7 @@ export default function CoachPage() {
         timestamp: new Date().toISOString(),
       };
       saveCoachMessage(welcome);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setMessages([welcome]);
     } else {
       setMessages(saved);

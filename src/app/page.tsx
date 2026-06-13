@@ -4,9 +4,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion, useInView } from 'motion/react';
 import {
-  Shield, ArrowRight, BookOpen, BarChart3, Brain, Heart, Sparkles,
-  Target, Zap, Wind, TrendingUp, Star, Users, Clock, ChevronRight,
-  AlertTriangle, CheckCircle, Activity,
+  Shield, ArrowRight, BookOpen, Brain, Heart, Sparkles,
+  Target, TrendingUp, Star, Users, Clock, ChevronRight,
+  CheckCircle,
 } from 'lucide-react';
 
 // ─── Animation Variants ───
@@ -65,20 +65,20 @@ export default function LandingPage() {
       {/* ─── Navbar ─── */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass-navbar">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5">
+          <Link href="/" aria-label="MindShield AI Home" className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[var(--brand-teal)] to-[var(--brand-lavender)] flex items-center justify-center">
               <Shield className="w-4.5 h-4.5 text-white" />
             </div>
             <span className="text-lg font-bold tracking-tight text-[var(--text-primary)]">MindShield AI</span>
           </Link>
           <div className="hidden md:flex items-center gap-8">
-            <a href="#features" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors">Features</a>
-            <a href="#how-it-works" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors">How It Works</a>
-            <a href="#testimonials" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors">Testimonials</a>
+            <a href="#features" aria-label="Go to Features section" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors">Features</a>
+            <a href="#how-it-works" aria-label="Go to How It Works section" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors">How It Works</a>
+            <a href="#testimonials" aria-label="Go to Testimonials section" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors">Testimonials</a>
           </div>
           <div className="flex items-center gap-4">
             <ThemeToggle />
-            <Link href="/dashboard" className="px-5 py-2 text-sm font-semibold rounded-full bg-gradient-to-r from-[var(--brand-teal)] to-[var(--brand-lavender)] text-white hover:opacity-90 transition-opacity">
+            <Link href="/dashboard" aria-label="Get Started with Dashboard" className="px-5 py-2 text-sm font-semibold rounded-full bg-gradient-to-r from-[var(--brand-teal)] to-[var(--brand-lavender)] text-white hover:opacity-90 transition-opacity">
               Get Started
             </Link>
           </div>
@@ -86,26 +86,26 @@ export default function LandingPage() {
       </nav>
 
       {/* ─── Hero ─── */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center pt-16 px-4 w-full">
-        {/* Orbs */}
-        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-[var(--brand-teal)] opacity-[0.08] blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-[-15%] left-[-10%] w-[400px] h-[400px] rounded-full bg-[var(--brand-lavender)] opacity-[0.07] blur-[100px] pointer-events-none" />
-        <div className="absolute top-[40%] left-[50%] w-[300px] h-[300px] rounded-full bg-[var(--brand-blue)] opacity-[0.05] blur-[80px] pointer-events-none" />
+      <section className="relative min-h-[90vh] flex flex-col items-center justify-center pt-24 pb-16 px-4 w-full overflow-hidden">
+        {/* Ambient Blobs */}
+        <div className="blob-bg bg-primary w-[40vw] h-[40vw] top-[-10vw] left-[-10vw]"></div>
+        <div className="blob-bg bg-tertiary-fixed-dim w-[30vw] h-[30vw] top-[10%] right-[-5vw]" style={{ animationDelay: '2s' }}></div>
+        <div className="blob-bg bg-secondary w-[50vw] h-[50vw] bottom-[-20vh] left-[20vw]" style={{ animationDelay: '4s' }}></div>
 
         <div className="relative z-10 text-center max-w-4xl mx-auto w-full flex flex-col items-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--glass-bg-medium)] border border-[var(--border-default)] text-xs text-[var(--text-secondary)] mb-6">
-              <Sparkles className="w-3.5 h-3.5 text-[var(--brand-lavender)]" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card text-xs text-primary font-semibold tracking-wider uppercase mb-6">
+              <Sparkles className="w-3.5 h-3.5 text-primary" />
               Powered by Generative AI
             </div>
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.7 }}
-            className="text-4xl sm:text-5xl md:text-7xl font-extrabold leading-[1.1] tracking-tight mb-6 text-[var(--text-primary)]"
+            className="text-display-lg md:text-[56px] md:leading-[64px] font-display-lg text-on-surface mb-6"
           >
             Your AI-Powered{' '}
-            <span className="bg-gradient-to-r from-[var(--brand-teal)] to-[var(--brand-lavender)] bg-clip-text text-transparent">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-tertiary-container">
               Mental Wellness
             </span>{' '}
             Companion for Exam Success
@@ -113,20 +113,19 @@ export default function LandingPage() {
 
           <motion.p
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.6 }}
-            className="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto mb-10 leading-relaxed"
+            className="text-body-lg font-body-lg text-on-surface-variant max-w-2xl mx-auto mb-10 leading-relaxed"
           >
-            Go beyond simple mood tracking. Detect hidden stress patterns, predict burnout,
-            and get personalized wellness coaching for NEET, JEE, UPSC & more.
+            Go beyond simple tracking. Understanding emotions through natural language journals. Detecting hidden stress patterns. Identifying emotional triggers. Predicting burnout for students preparing for high-stakes examinations such as NEET, JEE, CUET, CAT, GATE, UPSC, and Board Exams.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7, duration: 0.5 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full"
           >
-            <Link href="/dashboard" className="px-8 py-3.5 text-base font-semibold rounded-full bg-gradient-to-r from-[var(--brand-teal)] to-[var(--brand-lavender)] shadow-[0_8px_32px_var(--brand-teal-glow)] hover:shadow-[0_12px_40px_var(--brand-teal-glow)] text-white hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2">
+            <Link href="/dashboard" className="bg-gradient-to-r from-primary to-secondary text-on-primary font-label-md px-8 py-4 rounded-full shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all hover:-translate-y-1 text-center font-semibold flex items-center gap-2">
               Start Your Journey <ArrowRight className="w-4 h-4" />
             </Link>
-            <a href="#features" className="px-8 py-3.5 text-base font-medium rounded-full bg-[var(--glass-bg-medium)] border border-[var(--border-default)] hover:bg-[var(--glass-bg-heavy)] text-[var(--text-primary)] transition-all">
+            <a href="#features" className="glass-card text-on-surface font-label-md px-8 py-4 rounded-full transition-all hover:bg-white/80 text-center font-semibold flex items-center justify-center gap-2">
               See How It Works
             </a>
           </motion.div>
@@ -134,15 +133,15 @@ export default function LandingPage() {
           {/* Floating badges */}
           <motion.div
             animate={{ y: [0, -10, 0] }} transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-            className="hidden md:flex absolute -left-8 top-1/3 px-4 py-2.5 rounded-xl bg-[var(--glass-bg-medium)] backdrop-blur-xl border border-[var(--border-default)] text-[var(--text-primary)] text-sm items-center gap-1"
+            className="hidden md:flex absolute -left-8 top-1/3 px-4 py-2.5 rounded-xl glass-card text-on-surface text-sm items-center gap-1 shadow-xl"
           >
-            <span className="text-[var(--status-success)]">✓</span> Stress Level: <span className="text-[var(--brand-teal)] font-semibold">Low</span>
+            <span className="text-tertiary">✓</span> Stress Level: <span className="text-tertiary-fixed-dim font-bold">Low</span>
           </motion.div>
           <motion.div
             animate={{ y: [0, 12, 0] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-            className="hidden md:flex absolute -right-4 top-1/2 px-4 py-2.5 rounded-xl bg-[var(--glass-bg-medium)] backdrop-blur-xl border border-[var(--border-default)] text-[var(--text-primary)] text-sm items-center gap-1"
+            className="hidden md:flex absolute -right-4 top-1/2 px-4 py-2.5 rounded-xl glass-card ai-border text-on-surface text-sm items-center gap-1 shadow-xl"
           >
-            🧠 Burnout Risk: <span className="text-[#fbbf24] font-semibold">Moderate</span>
+            🧠 Burnout Risk: <span className="text-error font-bold">Moderate</span>
           </motion.div>
         </div>
       </section>
@@ -157,10 +156,10 @@ export default function LandingPage() {
       </section>
 
       {/* ─── Features ─── */}
-      <section id="features" className="py-20 md:py-28 px-4 w-full flex flex-col items-center">
+      <section id="features" className="py-24 px-4 w-full flex flex-col items-center">
         <div className="max-w-6xl mx-auto w-full">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }} variants={fadeUp} className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-extrabold mb-4">
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">
               Everything You Need for{' '}
               <span className="bg-gradient-to-r from-[var(--brand-teal)] to-[var(--brand-lavender)] bg-clip-text text-transparent">Mental Wellness</span>
             </h2>
@@ -181,10 +180,10 @@ export default function LandingPage() {
       </section>
 
       {/* ─── How It Works ─── */}
-      <section id="how-it-works" className="py-20 md:py-28 px-4 bg-[var(--bg-secondary)] w-full flex flex-col items-center">
+      <section id="how-it-works" className="py-24 px-4 bg-[var(--bg-secondary)] w-full flex flex-col items-center">
         <div className="max-w-4xl mx-auto w-full">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-extrabold mb-4">How It Works</h2>
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">How It Works</h2>
             <p className="text-[var(--text-secondary)] text-lg">Three simple steps to better mental wellness</p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 relative">
@@ -238,10 +237,10 @@ export default function LandingPage() {
       </section>
 
       {/* ─── AI Demo ─── */}
-      <section className="py-20 md:py-28 px-4 bg-[var(--bg-secondary)] w-full flex flex-col items-center">
+      <section className="py-24 px-4 bg-[var(--bg-secondary)] w-full flex flex-col items-center">
         <div className="max-w-5xl mx-auto w-full">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-extrabold mb-4">See AI Analysis in Action</h2>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">See AI Analysis in Action</h2>
             <p className="text-[var(--text-secondary)]">Watch how MindShield AI understands your emotions</p>
           </motion.div>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
@@ -309,10 +308,10 @@ export default function LandingPage() {
       </section>
 
       {/* ─── Testimonials ─── */}
-      <section id="testimonials" className="py-20 md:py-28 px-4 w-full flex flex-col items-center">
-        <div className="max-w-5xl mx-auto w-full">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-extrabold mb-4">Students Love MindShield AI</h2>
+      <section id="testimonials" className="py-24 px-4 w-full flex flex-col items-center">
+        <div className="max-w-6xl mx-auto w-full">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">Loved by Students</h2>
             <p className="text-[var(--text-secondary)]">Real stories from real exam warriors</p>
           </motion.div>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -337,14 +336,14 @@ export default function LandingPage() {
       </section>
 
       {/* ─── CTA ─── */}
-      <section className="py-20 md:py-28 px-4 relative overflow-hidden w-full flex flex-col items-center">
-        <div className="absolute inset-0 bg-gradient-to-br from-[var(--brand-lavender)]/10 to-[var(--brand-teal)]/10" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full bg-[var(--brand-lavender)] opacity-[0.06] blur-[100px]" />
+      <section className="py-24 px-4 relative overflow-hidden w-full flex flex-col items-center">
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary-container)] to-[var(--color-tertiary-fixed)] opacity-[0.03]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full bg-[var(--color-secondary)] opacity-[0.06] blur-[100px]" />
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="relative z-10 text-center max-w-2xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-extrabold mb-4">Start Your Wellness Journey Today</h2>
-          <p className="text-[var(--text-secondary)] text-lg mb-8">Your mental health matters more than any exam score. Let MindShield AI be your trusted companion.</p>
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">Start Your Wellness Journey Today</h2>
+          <p className="text-on-surface-variant text-lg mb-8">Your mental health matters more than any exam score. Let MindShield AI be your trusted companion.</p>
           <Link href="/dashboard"
-            className="inline-flex items-center gap-2 px-10 py-4 text-lg font-bold rounded-full bg-gradient-to-r from-[var(--brand-teal)] to-[var(--brand-lavender)] shadow-[0_8px_32px_var(--brand-teal-glow)] hover:shadow-[0_12px_48px_var(--brand-teal-glow)] text-white hover:-translate-y-1 transition-all"
+            className="inline-flex items-center justify-center gap-2 px-10 py-4 text-lg font-bold rounded-full bg-gradient-to-r from-primary to-tertiary-container shadow-lg shadow-primary/25 hover:shadow-primary/40 text-on-primary hover:-translate-y-1 transition-all"
           >
             Get Started Free <ChevronRight className="w-5 h-5" />
           </Link>

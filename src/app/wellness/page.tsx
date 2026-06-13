@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import {
   Heart, Wind, Clock, Play, Pause, RotateCcw, Sparkles,
   Sun, Eye, Target, Pencil, Moon, Coffee, BookOpen,
@@ -14,8 +14,7 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 300, damping: 24 } },
 };
 
-// ─── Breathing Exercise Component ───
-type BreathingPhase = 'inhale' | 'hold1' | 'exhale' | 'hold2' | 'idle';
+
 
 interface BreathingConfig {
   name: string;
@@ -87,6 +86,7 @@ function BreathingCard({ config }: { config: BreathingConfig }) {
 
   useEffect(() => {
     if (!active) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setCountdown(config.phases[phaseIdx].duration);
     const timer = setInterval(() => {
       setCountdown((c) => {
@@ -103,6 +103,7 @@ function BreathingCard({ config }: { config: BreathingConfig }) {
   }, [active, phaseIdx, config.phases]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (cycles >= 4) reset();
   }, [cycles, reset]);
 
@@ -153,7 +154,7 @@ function BreathingCard({ config }: { config: BreathingConfig }) {
           {active ? 'Pause' : 'Start'}
         </button>
         {active && (
-          <button onClick={reset} className="p-2 rounded-lg bg-[var(--glass-bg-medium)] text-[var(--text-secondary)] hover:text-[var(--text-secondary)]">
+          <button onClick={reset} aria-label="Reset exercise" className="p-2 rounded-lg bg-[var(--glass-bg-medium)] text-[var(--text-secondary)] hover:text-[var(--text-secondary)]">
             <RotateCcw className="w-3.5 h-3.5" />
           </button>
         )}

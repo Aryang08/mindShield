@@ -28,7 +28,11 @@ export const metadata: Metadata = {
   },
 };
 
+import { Outfit, Manrope } from 'next/font/google';
 import { ThemeProvider } from "@/components/ThemeProvider";
+
+const outfit = Outfit({ subsets: ['latin'], display: 'swap', variable: '--font-outfit' });
+const manrope = Manrope({ subsets: ['latin'], display: 'swap', variable: '--font-manrope' });
 
 export default function RootLayout({
   children,
@@ -37,20 +41,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="antialiased text-[var(--text-primary)] bg-[var(--bg-primary)]">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+      <body className={`${manrope.className} ${outfit.variable} ${manrope.variable} antialiased text-[var(--on-background)] bg-[var(--background)]`} suppressHydrationWarning>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           {children}
         </ThemeProvider>
       </body>

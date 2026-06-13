@@ -11,6 +11,10 @@ export async function POST(request: NextRequest) {
       profile: UserProfile | null;
     };
 
+    if (journals?.length > 30 || moods?.length > 30) {
+      return NextResponse.json({ error: 'Payload exceeds maximum allowed records' }, { status: 413 });
+    }
+
     const apiKey = process.env.GEMINI_API_KEY;
 
     if (apiKey) {

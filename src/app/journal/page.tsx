@@ -41,6 +41,7 @@ export default function JournalPage() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setJournals(getJournals());
   }, []);
 
@@ -95,7 +96,7 @@ export default function JournalPage() {
           <h1 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2.5">
             <BookOpen className="w-6 h-6 text-[var(--brand-teal)]" /> Daily Journal
           </h1>
-          <p className="text-sm text-[var(--text-muted)] mt-1.5">{today}</p>
+          <p className="text-sm text-[var(--text-muted)] mt-1.5" suppressHydrationWarning>{today}</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">

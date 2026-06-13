@@ -15,6 +15,9 @@ export async function POST(request: NextRequest) {
     if (!content || content.trim().length < 10) {
       return NextResponse.json({ error: 'Journal entry too short' }, { status: 400 });
     }
+    if (content.length > 5000) {
+      return NextResponse.json({ error: 'Journal entry exceeds maximum length (5000 characters)' }, { status: 413 });
+    }
 
     // Crisis check first
     const crisisCheck = detectCrisis(content);

@@ -15,6 +15,9 @@ export async function POST(request: NextRequest) {
     if (!message || message.trim().length === 0) {
       return NextResponse.json({ error: 'Message is empty' }, { status: 400 });
     }
+    if (message.length > 2000) {
+      return NextResponse.json({ error: 'Message exceeds maximum length (2000 characters)' }, { status: 413 });
+    }
 
     const crisisDetected = detectCrisis(message);
 
