@@ -119,13 +119,15 @@ export default function DashboardPage() {
   const today = new Date().toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
   // Build chart data from real mood entries (last 7)
-  const weekData = hasData
-    ? moodEntries.slice(-7).map((m) => ({
-        day: new Date(m.createdAt).toLocaleDateString('en-IN', { weekday: 'short' }),
-        mood: m.intensity,
-        stress: Math.max(10 - m.intensity, 1) * 10,
-      }))
-    : [];
+  const weekData = React.useMemo(() => {
+    return hasData
+      ? moodEntries.slice(-7).map((m) => ({
+          day: new Date(m.createdAt).toLocaleDateString('en-IN', { weekday: 'short' }),
+          mood: m.intensity,
+          stress: Math.max(10 - m.intensity, 1) * 10,
+        }))
+      : [];
+  }, [hasData, moodEntries]);
 
   return (
     <DashboardLayout>
@@ -166,7 +168,7 @@ export default function DashboardPage() {
                   className="w-32 accent-[var(--brand-teal)]"
                 />
               </div>
-              <button onClick={handleSaveMood} className="px-6 py-2.5 text-sm font-semibold rounded-xl bg-gradient-to-r from-[var(--brand-teal)] to-[var(--brand-lavender)] text-white hover:opacity-90 transition-opacity shadow-md">
+              <button onClick={handleSaveMood} aria-label="Save current mood" className="px-6 py-2.5 text-sm font-semibold rounded-xl bg-gradient-to-r from-[var(--brand-teal)] to-[var(--brand-lavender)] text-white hover:opacity-90 transition-opacity shadow-md">
                 Save Mood
               </button>
             </div>
