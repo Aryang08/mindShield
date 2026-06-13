@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'motion/react';
 import {
-  Zap, BookOpen, ArrowRight, BarChart3, Flame, Sparkles, Target, AlertTriangle, Trophy, Wind, MessageCircle, TrendingUp
+  Zap, BookOpen, ArrowRight, BarChart3, Flame, Sparkles, Target, AlertTriangle, Trophy, Wind, MessageCircle, TrendingUp, CheckCircle
 } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
@@ -173,7 +173,8 @@ export default function DashboardPage() {
           )}
           {moodSaved && (
             <div className="mt-4 flex items-center gap-2">
-              <span className="text-sm text-[var(--status-success)] font-medium">✓ Mood logged for today!</span>
+              <CheckCircle className="h-4 w-4 text-[var(--status-success)]" />
+              <span className="text-sm text-[var(--status-success)] font-medium">Mood logged for today</span>
             </div>
           )}
         </motion.div>
@@ -187,11 +188,11 @@ export default function DashboardPage() {
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
               {/* Stress Score */}
               <div className="glass-card p-6 rounded-2xl flex flex-col items-center">
-                <CircularGauge value={Math.round(moodEntries.slice(-1)[0]?.intensity * 10 || 0)} color="var(--color-primary)" label="Stress Score" />
+                <CircularGauge value={Math.round(moodEntries.slice(-1)[0]?.intensity * 10 || 0)} color="var(--brand-teal)" label="Stress Score" />
               </div>
               {/* Burnout Risk */}
               <div className="glass-card p-6 rounded-2xl flex flex-col items-center gap-3">
-                <div className="text-sm text-on-surface-variant font-medium">Burnout Risk</div>
+                <div className="text-sm text-[var(--text-secondary)] font-medium">Burnout Risk</div>
                 <span className="px-3 py-1.5 rounded-full text-xs font-bold bg-[var(--status-warning)]/20 text-[var(--status-warning)]">
                   {moodEntries.length < 3 ? 'Insufficient Data' : 'Moderate'}
                 </span>
@@ -206,11 +207,11 @@ export default function DashboardPage() {
               </div>
               {/* Confidence */}
               <div className="glass-card p-6 rounded-2xl flex flex-col items-center">
-                <CircularGauge value={Math.round(moodEntries.slice(-1)[0]?.intensity * 10 || 0)} color="var(--color-secondary)" label="Confidence" />
+                <CircularGauge value={Math.round(moodEntries.slice(-1)[0]?.intensity * 10 || 0)} color="var(--brand-lavender)" label="Confidence" />
               </div>
               {/* Streak */}
               <div className="glass-card p-6 rounded-2xl flex flex-col items-center gap-3">
-                <div className="text-sm text-on-surface-variant font-medium">Journal Streak</div>
+                <div className="text-sm text-[var(--text-secondary)] font-medium">Journal Streak</div>
                 <div className="flex items-center gap-2">
                   <Flame className="w-7 h-7 text-[var(--status-warning)]" />
                   <span className="text-3xl font-bold text-[var(--text-primary)]">{journalCount}</span>

@@ -131,11 +131,12 @@ export default function JournalPage() {
                 )}
                 {journals.map((entry) => (
                   <motion.div key={entry.id} layout className="rounded-xl bg-[var(--glass-bg-medium)] border border-[var(--border-default)] overflow-hidden">
-                    <button
-                      onClick={() => setExpandedId(expandedId === entry.id ? null : entry.id)}
-                      className="w-full flex items-center justify-between p-4 text-left"
-                    >
-                      <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-2 p-4">
+                      <button
+                        onClick={() => setExpandedId(expandedId === entry.id ? null : entry.id)}
+                        className="flex-1 min-w-0 text-left"
+                        aria-expanded={expandedId === entry.id}
+                      >
                         <div className="flex items-center gap-2 mb-1">
                           <Calendar className="w-3 h-3 text-[var(--text-secondary)]" />
                           <span className="text-xs text-[var(--text-secondary)]">{entry.date}</span>
@@ -149,15 +150,25 @@ export default function JournalPage() {
                           )}
                         </div>
                         <p className="text-sm text-[var(--text-secondary)] truncate">{entry.content.substring(0, 100)}...</p>
-                      </div>
+                      </button>
                       <div className="flex items-center gap-2 ml-2">
-                        <button onClick={(e) => { e.stopPropagation(); handleDelete(entry.id); }}
+                        <button
+                          type="button"
+                          onClick={() => handleDelete(entry.id)}
+                          aria-label="Delete journal entry"
                           className="p-1 rounded hover:bg-[var(--glass-bg-medium)] text-[var(--text-secondary)] hover:text-red-400 transition-colors">
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
-                        {expandedId === entry.id ? <ChevronUp className="w-4 h-4 text-[var(--text-secondary)]" /> : <ChevronDown className="w-4 h-4 text-[var(--text-secondary)]" />}
+                        <button
+                          type="button"
+                          onClick={() => setExpandedId(expandedId === entry.id ? null : entry.id)}
+                          aria-label={expandedId === entry.id ? 'Collapse journal entry' : 'Expand journal entry'}
+                          className="p-1 rounded hover:bg-[var(--glass-bg-medium)] text-[var(--text-secondary)] transition-colors"
+                        >
+                          {expandedId === entry.id ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                        </button>
                       </div>
-                    </button>
+                    </div>
                     <AnimatePresence>
                       {expandedId === entry.id && (
                         <motion.div
