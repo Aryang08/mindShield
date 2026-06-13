@@ -134,7 +134,7 @@ export default function DashboardPage() {
         <motion.div variants={fadeUp}>
           <h1 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)]">Welcome back! 👋</h1>
           <p className="text-[var(--text-muted)] text-sm mt-1.5" suppressHydrationWarning>{today}</p>
-          <p className="text-[var(--text-secondary)] text-sm mt-1 italic">&quot;Every hour of focused study is progress. Trust the process.&quot;</p>
+          <p className="text-[var(--text-secondary)] text-sm mt-1 italic">&quot;Every hour of focused study for NEET, JEE, CUET, CAT, GATE, UPSC, or Board Exams is progress. Trust the process.&quot;</p>
         </motion.div>
 
         {/* Quick Mood Check */}

@@ -20,14 +20,19 @@ describe('Storage Module', () => {
     saveMood({
       id: '1',
       date: '2023-10-01',
-      mood: 'happy',
+      mood: 'great',
+      emoji: '😄',
       intensity: 8,
-      notes: 'Good day'
+      factors: ['study'],
+      studyHours: 4,
+      sleepHours: 8,
+      note: 'Good day',
+      createdAt: '2023-10-01T12:00:00Z'
     });
     
     const moods = getMoods();
     expect(moods.length).toBe(1);
-    expect(moods[0].mood).toBe('happy');
+    expect(moods[0].mood).toBe('great');
   });
 
   it('handles journals correctly', () => {
@@ -36,13 +41,13 @@ describe('Storage Module', () => {
     saveJournal({
       id: 'j1',
       date: '2023-10-01',
-      title: 'Exam Prep',
       content: 'Studied for 4 hours.',
-      analysis: null
+      aiAnalysis: null,
+      createdAt: '2023-10-01T12:00:00Z'
     });
     
     const journals = getJournals();
     expect(journals.length).toBe(1);
-    expect(journals[0].title).toBe('Exam Prep');
+    expect(journals[0].content).toBe('Studied for 4 hours.');
   });
 });
